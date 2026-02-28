@@ -1,0 +1,22 @@
+[package]
+name = "live_poll"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = "21.0.0"
+soroban-sdk-macros = "21.0.0"
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+lto = true
+codegen-units = 1
+
+[profile.release.package."*"]
+opt-level = "z"
+overflow-checks = true
