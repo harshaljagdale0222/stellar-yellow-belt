@@ -1,16 +1,67 @@
-# React + Vite
+# Stellar Yellow Belt Project 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Overview
+This project is a **Live Poll dApp** built on the Stellar blockchain.  
+It allows users to connect their wallet and participate in a real-time poll system.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
+https://stellar-yellow-belt.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Setup Instructions
 
-## Expanding the ESLint configuration
+1. Clone the repository:
+git clone https://github.com/harshaljagdale0222/stellar-yellow-belt.git
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. Navigate to project folder:
+cd stellar-yellow-belt
+
+3. Install dependencies:
+npm install
+
+4. Run the project:
+npm run dev
+
+---
+
+## 🔗 Wallet Integration
+- Connect using Freighter Wallet  
+- Ensure wallet is unlocked before interaction  
+
+---
+
+## 📸 Screenshots
+
+### Wallet Connected
+![Wallet](./wallet-connected.png)
+
+### Transaction Success
+![Transaction](./transaction-success.png)
+
+### App UI
+![App](./app-ui.png)
+
+---
+
+## 📦 Smart Contract Details
+
+- **Contract Address:** CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC  
+- **Transaction Hash:** 7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e  
+
+🔗 **View on Stellar Expert:**  
+https://stellar.expert/explorer/testnet/tx/7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
+
+---
+
+## 🛠️ Tech Stack
+- Vite + JavaScript  
+- Stellar SDK  
+- Freighter Wallet  
+
+---
+
+## 👨‍💻 Author
+Harshal Jagdale
