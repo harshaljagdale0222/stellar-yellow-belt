@@ -1,73 +1,133 @@
-#![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, vec, Env, Symbol, Vec, Map, String};
-
-#[contracttype]
-pub enum DataKey {
-    Poll(u64),
-    Vote(u64, String),
-    PollCount,
-}
-
-#[contracttype]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub struct Poll {
-    pub id: u64,
+    pub id: String,
     pub question: String,
-    pub yes_votes: u64,
-    pub no_votes: u64,
-    pub end_time: u64,
-    pub creator: String,
+    pub yes_votes: u32,
+    pub no_votes: u32,
 }
 
-#[contract]
-pub struct LivePollContract;
-
-#[contractimpl]
-impl LivePollContract {
-    pub fn create_poll(env: Env, question: String, end_time: u64, creator: String) -> u64 {
-        let count: u64 = env.storage().instance().get(&DataKey::PollCount).unwrap_or(0);
-        let id = count + 1;
-
-        let poll = Poll {
-            id,
-            question,
-            yes_votes: 0,
-            no_votes: 0,
-            end_time,
-            creator,
-        };
-
-        env.storage().instance().set(&DataKey::Poll(id), &poll);
-        env.storage().instance().set(&DataKey::PollCount, &id);
-        id
+pub fn create_poll(id: String, question: String) -> Poll {
+    Poll {
+        id,
+        question,
+        yes_votes: 0,
+        no_votes: 0,
     }
+}
 
-    pub fn vote(env: Env, poll_id: u64, voter: String, option: Symbol) {
-        let mut poll: Poll = env.storage().instance().get(&DataKey::Poll(poll_id)).unwrap();
-
-        let vote_key = DataKey::Vote(poll_id, voter.clone());
-        let already_voted: bool = env.storage().instance().has(&vote_key);
-        if already_voted {
-            panic!("Already voted");
-        }
-
-        if option == symbol_short!("yes") {
+pub fn submit_vote(poll: &mut Poll, option: &str) -> bool {
+    match option {
+        "yes" => {
             poll.yes_votes += 1;
-        } else if option == symbol_short!("no") {
+            true
+        }
+        "no" => {
             poll.no_votes += 1;
-        } else {
-            panic!("Invalid option");
+            true
+        }
+        _ => false,
+    }
+}
+
+pub fn get_total_votes(poll: &Poll) -> u32 {
+    poll.yes_votes + poll.no_votes
+}
+
+pub fn get_percentage(poll: &Poll) -> (f64, f64) {
+    let total = get_total_votes(poll) as f64;
+    if total == 0.0 {
+        return (0.0, 0.0);
+    }
+    let yes_percent = (poll.yes_votes as f64 / total) * 100.0;
+    let no_percent = (poll.no_votes as f64 / total) * 100.0;
+    (yes_percent, no_percent)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_poll_creation() {
+        let poll = create_poll(
+            "poll_001".to_string(),
+            "Is Stellar the future of blockchain?".to_string(),
+        );
+
+        assert_eq!(poll.id, "poll_001");
+        assert_eq!(poll.question, "Is Stellar the future of blockchain?");
+        assert_eq!(poll.yes_votes, 0);
+        assert_eq!(poll.no_votes, 0);
+    }
+
+    #[test]
+    fn test_vote_submission() {
+        let mut poll = create_poll(
+            "poll_002".to_string(),
+            "Do you like voting?".to_string(),
+        );
+
+        let vote_yes = submit_vote(&mut poll, "yes");
+        let vote_no = submit_vote(&mut poll, "no");
+
+        assert_eq!(vote_yes, true);
+        assert_eq!(vote_no, true);
+        assert_eq!(poll.yes_votes, 1);
+        assert_eq!(poll.no_votes, 1);
+    }
+
+    #[test]
+    fn test_total_votes() {
+        let mut poll = create_poll(
+            "poll_003".to_string(),
+            "Test question?".to_string(),
+        );
+
+        submit_vote(&mut poll, "yes");
+        submit_vote(&mut poll, "yes");
+        submit_vote(&mut poll, "yes");
+        submit_vote(&mut poll, "no");
+        submit_vote(&mut poll, "no");
+
+        assert_eq!(get_total_votes(&poll), 5);
+        assert_eq!(poll.yes_votes, 3);
+        assert_eq!(poll.no_votes, 2);
+    }
+
+    #[test]
+    fn test_percentage_calculation() {
+        let mut poll = create_poll(
+            "poll_004".to_string(),
+            "Percentage test?".to_string(),
+        );
+
+        for _ in 0..5 {
+            submit_vote(&mut poll, "yes");
+        }
+        for _ in 0..3 {
+            submit_vote(&mut poll, "no");
         }
 
-        env.storage().instance().set(&DataKey::Poll(poll_id), &poll);
-        env.storage().instance().set(&vote_key, &true);
+        let (yes_percent, no_percent) = get_percentage(&poll);
+
+        assert!(yes_percent > 62.0);
+        assert!(yes_percent < 63.0);
+        assert!(no_percent > 37.0);
+        assert!(no_percent < 38.0);
     }
 
-    pub fn get_poll(env: Env, poll_id: u64) -> Poll {
-        env.storage().instance().get(&DataKey::Poll(poll_id)).unwrap()
-    }
+    #[test]
+    fn test_invalid_vote_option() {
+        let mut poll = create_poll(
+            "poll_005".to_string(),
+            "Invalid vote test?".to_string(),
+        );
 
-    pub fn get_poll_count(env: Env) -> u64 {
-        env.storage().instance().get(&DataKey::PollCount).unwrap_or(0)
+        let invalid_vote = submit_vote(&mut poll, "maybe");
+
+        assert_eq!(invalid_vote, false);
+        assert_eq!(poll.yes_votes, 0);
+        assert_eq!(poll.no_votes, 0);
+        assert_eq!(get_total_votes(&poll), 0);
     }
 }

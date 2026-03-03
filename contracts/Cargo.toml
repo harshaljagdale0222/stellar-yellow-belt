@@ -1,0 +1,10 @@
+[package]
+name = "contracts"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[lib]
+name = "contracts"
+path = "live-poll/src/lib.rs"
