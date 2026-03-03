@@ -1,16 +1,107 @@
-# React + Vite
+# 🗳️ Stellar Live Poll
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Real-time on-chain voting DApp built on Stellar Soroban
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Overview
 
-## React Compiler
+**Stellar Live Poll** is a decentralized voting DApp built on the Stellar blockchain using Soroban smart contracts.
+Users connect their wallet and vote in a real-time poll.
+All votes are stored **on-chain** with live updates and transaction tracking.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌐 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+👉 https://stellar-yellow-belt.vercel.app
+
+*(Frontend deployed on Vercel connected to Stellar Testnet contract)*
+
+---
+
+## 🖼️ Screenshots
+
+### Wallet Connection
+
+![Wallet](wallet-connected.png)
+
+### Transaction Success
+
+![Transaction](transaction-success.png)
+
+### App UI (Voting)
+
+![App](app-ui.png)
+
+---
+
+## 🥋 Yellow Belt – Level 2 Requirements
+
+| Requirement                          | Status |
+| ------------------------------------ | ------ |
+| Soroban contract deployed on testnet | ✅      |
+| Frontend calls contract              | ✅      |
+| Transaction status visible           | ✅      |
+| Wallet integration                   | ✅      |
+| Real-time voting UI                  | ✅      |
+| 2+ meaningful commits                | ✅      |
+
+---
+
+## 📋 Contract Details
+
+### Contract Address
+
+CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC
+
+### Transaction Hash
+
+7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
+
+### 🔗 View on Stellar Expert
+
+https://stellar.expert/explorer/testnet/tx/7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
+
+---
+
+## 🚀 Quick Start (Local Setup)
+
+### Prerequisites
+
+* Node.js
+* Freighter Wallet
+* Testnet XLM (Friendbot)
+
+### Installation
+
+git clone https://github.com/harshaljagdale0222/stellar-yellow-belt.git
+cd stellar-yellow-belt
+npm install
+npm run dev
+
+Open http://localhost:5173
+
+---
+
+## ✨ Features
+
+* 🔐 Wallet connection (Freighter)
+* ⚡ Real-time voting updates
+* 📊 Transaction status tracking
+* 🌐 On-chain data storage
+
+---
+
+## 🛠️ Tech Stack
+
+* Vite + JavaScript
+* Stellar SDK
+* Freighter Wallet
+* Stellar Testnet
+
+---
+
+## 👨‍💻 Author
+
+Harshal Jagdale
