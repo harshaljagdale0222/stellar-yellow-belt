@@ -88,66 +88,64 @@
 // export default App;
 
 import React, { useState } from 'react';
-import { Wallet, Gift, LogOut, Zap, CheckCircle } from 'lucide-react';
+import { Wallet, Gift, LogOut, Zap } from 'lucide-react';
 import RewardsDisplay from './components/RewardsDisplay';
 
 export default function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [userRewards, setUserRewards] = useState(0);
   const [showReward, setShowReward] = useState(false);
-  const [voteSuccess, setVoteSuccess] = useState(null);
-  const [interContractLogs, setInterContractLogs] = useState([]);
+  const [interContractLog, setInterContractLog] = useState([]);
+  const [lastTransaction, setLastTransaction] = useState(null);
 
   const handleConnect = () => {
     setIsConnected(true);
-    addLog('✅ Wallet Connected Successfully');
+    addLog('✅ Wallet Connected');
   };
 
   const handleDisconnect = () => {
     setIsConnected(false);
     setUserRewards(0);
-    setInterContractLogs([]);
+    setInterContractLog([]);
+    addLog('❌ Wallet Disconnected');
   };
 
   const addLog = (message) => {
-    setInterContractLogs(prev => [...prev, {
+    setInterContractLog(prev => [...prev, {
       message,
-      time: new Date().toLocaleTimeString()
+      timestamp: new Date().toLocaleTimeString()
     }]);
   };
 
   const handleVote = (option) => {
-    // Step 1: Submit Vote
-    addLog(`🗳️ User voted for: "${option}"`);
+    // STEP 1: Voting Contract - submit vote
+    addLog(`🗳️ Voting on: "${option}"`);
     
-    // Step 2: Voting Contract receives vote
+    // STEP 2: Inter-Contract Call - Voting → Rewards
     setTimeout(() => {
-      addLog('📝 Voting Contract: Vote recorded');
+      addLog('🔗 Inter-Contract Call Initiated');
+      addLog('📡 Voting Contract → Rewards Contract');
       
-      // Step 3: Inter-Contract Call initiated
+      // STEP 3: Rewards Contract - award points
       setTimeout(() => {
-        addLog('🔗 INTER-CONTRACT CALL INITIATED');
-        addLog('📤 Voting Contract → Rewards Contract');
+        const newRewards = userRewards + 10;
+        setUserRewards(newRewards);
+        setShowReward(true);
         
-        // Step 4: Rewards Contract awards points
-        setTimeout(() => {
-          const newRewards = userRewards + 10;
-          setUserRewards(newRewards);
-          setShowReward(true);
-          
-          addLog('💰 Rewards Contract: +10 Points Awarded');
-          addLog(`✨ Total Rewards Updated: ${newRewards} pts`);
-          
-          setVoteSuccess({
-            option: option,
-            points: 10,
-            total: newRewards
-          });
-          
-          setTimeout(() => setVoteSuccess(null), 5000);
-        }, 600);
-      }, 600);
-    }, 400);
+        addLog('✨ Rewards Contract: +10 Points Awarded');
+        addLog(`💰 Total Rewards: ${newRewards} Points`);
+        
+        setLastTransaction({
+          type: 'inter-contract-call',
+          votedFor: option,
+          pointsEarned: 10,
+          totalPoints: newRewards,
+          contractChain: 'VotingContract → RewardsContract'
+        });
+        
+        setTimeout(() => setShowReward(false), 5000);
+      }, 800);
+    }, 500);
   };
 
   return (
@@ -155,19 +153,14 @@ export default function App() {
       {/* Header */}
       <header className="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-cyan-400">🗳️ Stellar Live Polls</h1>
-            <p className="text-xs text-slate-400">Level 4 - Inter-Contract Calls</p>
-          </div>
+          <h1 className="text-2xl font-bold text-cyan-400">🗳️ Stellar Live Polls - Level 4</h1>
           
           <div className="flex items-center gap-4">
             {isConnected && (
-              <div className="bg-yellow-500/20 border border-yellow-500/50 px-4 py-2 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <Gift className="w-5 h-5 text-yellow-400" />
-                  <span className="text-yellow-300 font-bold">{userRewards}</span>
-                  <span className="text-yellow-300 text-sm">Points</span>
-                </div>
+              <div className="bg-yellow-500/20 border border-yellow-500/50 px-4 py-2 rounded-lg flex items-center gap-2">
+                <Gift className="w-5 h-5 text-yellow-400" />
+                <span className="text-yellow-300 font-bold">{userRewards}</span>
+                <span className="text-yellow-300 text-sm">Points</span>
               </div>
             )}
 
@@ -177,7 +170,7 @@ export default function App() {
                 className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-lg font-semibold transition"
               >
                 <Wallet className="inline w-4 h-4 mr-2" />
-                Connect
+                Connect Wallet
               </button>
             ) : (
               <button
@@ -194,45 +187,45 @@ export default function App() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         {!isConnected ? (
-          <div className="text-center py-32">
-            <h2 className="text-4xl font-bold text-white mb-4">🔐 Connect Wallet</h2>
-            <p className="text-slate-400 mb-8 text-lg">Vote and earn rewards through inter-contract calls!</p>
+          <div className="text-center py-20">
+            <h2 className="text-4xl font-bold text-white mb-4">🔐 Connect Your Wallet</h2>
+            <p className="text-slate-400 mb-8 text-lg">Vote on polls and earn rewards via inter-contract calls!</p>
             <button
               onClick={handleConnect}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition"
             >
-              Connect Wallet Now
+              Connect Wallet
             </button>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-6">
-            {/* Polls - 2/3 */}
+            {/* Polls Section - 2/3 width */}
             <div className="col-span-2">
-              <h2 className="text-2xl font-bold text-white mb-6">🗳️ Active Polls</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">Active Polls</h2>
               
               <div className="grid gap-6">
                 {/* Poll 1 */}
-                <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+                <div className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:border-cyan-500 transition">
                   <h3 className="text-xl font-bold text-white mb-4">Best Programming Language?</h3>
                   
                   <div className="space-y-3 mb-6">
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-slate-300">JavaScript</span>
-                        <span className="text-cyan-400 font-bold">6 (66%)</span>
+                        <span className="text-slate-300 font-semibold">JavaScript</span>
+                        <span className="text-cyan-400">6 (66%)</span>
                       </div>
-                      <div className="bg-slate-700 h-3 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-2/3"></div>
+                      <div className="bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div className="bg-cyan-500 h-full w-2/3"></div>
                       </div>
                     </div>
                     
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-slate-300">Python</span>
-                        <span className="text-cyan-400 font-bold">3 (33%)</span>
+                        <span className="text-slate-300 font-semibold">Python</span>
+                        <span className="text-cyan-400">3 (33%)</span>
                       </div>
-                      <div className="bg-slate-700 h-3 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-1/3"></div>
+                      <div className="bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div className="bg-cyan-500 h-full w-1/3"></div>
                       </div>
                     </div>
                   </div>
@@ -240,14 +233,14 @@ export default function App() {
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => handleVote('JavaScript')}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition flex items-center justify-center gap-2"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded transition flex items-center justify-center gap-2"
                     >
                       <Zap className="w-4 h-4" />
-                      Vote JavaScript
+                      Vote JS
                     </button>
                     <button
                       onClick={() => handleVote('Python')}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition flex items-center justify-center gap-2"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded transition flex items-center justify-center gap-2"
                     >
                       <Zap className="w-4 h-4" />
                       Vote Python
@@ -256,27 +249,27 @@ export default function App() {
                 </div>
 
                 {/* Poll 2 */}
-                <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+                <div className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:border-cyan-500 transition">
                   <h3 className="text-xl font-bold text-white mb-4">Blockchain Future?</h3>
                   
                   <div className="space-y-3 mb-6">
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-slate-300">Bright 🚀</span>
-                        <span className="text-cyan-400 font-bold">8 (66%)</span>
+                        <span className="text-slate-300 font-semibold">Bright</span>
+                        <span className="text-cyan-400">8 (66%)</span>
                       </div>
-                      <div className="bg-slate-700 h-3 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-2/3"></div>
+                      <div className="bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div className="bg-cyan-500 h-full w-2/3"></div>
                       </div>
                     </div>
                     
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-slate-300">Uncertain ❓</span>
-                        <span className="text-cyan-400 font-bold">4 (33%)</span>
+                        <span className="text-slate-300 font-semibold">Uncertain</span>
+                        <span className="text-cyan-400">4 (33%)</span>
                       </div>
-                      <div className="bg-slate-700 h-3 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-1/3"></div>
+                      <div className="bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div className="bg-cyan-500 h-full w-1/3"></div>
                       </div>
                     </div>
                   </div>
@@ -284,14 +277,14 @@ export default function App() {
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => handleVote('Bright')}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition flex items-center justify-center gap-2"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded transition flex items-center justify-center gap-2"
                     >
                       <Zap className="w-4 h-4" />
-                      Bright Future
+                      Bright
                     </button>
                     <button
                       onClick={() => handleVote('Uncertain')}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded transition flex items-center justify-center gap-2"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded transition flex items-center justify-center gap-2"
                     >
                       <Zap className="w-4 h-4" />
                       Uncertain
@@ -301,75 +294,64 @@ export default function App() {
               </div>
             </div>
 
-            {/* Inter-Contract Call Display - 1/3 */}
+            {/* Inter-Contract Call Log - 1/3 width */}
             <div className="col-span-1">
-              {/* Contract Flow Diagram */}
-              <div className="bg-slate-800 border-2 border-cyan-500 rounded-lg p-6 mb-6">
-                <h3 className="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
+              <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 sticky top-24">
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-yellow-400" />
                   Contract Flow
                 </h3>
-                
-                <div className="space-y-3 text-center">
-                  <div className="bg-cyan-500/20 border border-cyan-500 rounded p-3">
-                    <div className="text-cyan-400 font-bold text-sm">🗳️ Voting Contract</div>
-                    <div className="text-xs text-cyan-300 mt-1">Accepts votes</div>
-                  </div>
-                  
-                  <div className="text-cyan-400 font-bold">⬇️</div>
-                  
-                  <div className="bg-yellow-500/20 border border-yellow-500 rounded p-3">
-                    <div className="text-yellow-400 font-bold text-sm">🔗 Inter-Contract Call</div>
-                    <div className="text-xs text-yellow-300 mt-1">Voting → Rewards</div>
-                  </div>
-                  
-                  <div className="text-yellow-400 font-bold">⬇️</div>
-                  
-                  <div className="bg-green-500/20 border border-green-500 rounded p-3">
-                    <div className="text-green-400 font-bold text-sm">💰 Rewards Contract</div>
-                    <div className="text-xs text-green-300 mt-1">Awards +10 points</div>
+
+                {/* Contract Chain Diagram */}
+                <div className="mb-6 p-4 bg-slate-700/50 rounded border border-cyan-500/30">
+                  <div className="text-center">
+                    <div className="bg-cyan-500/20 border border-cyan-500 rounded p-2 mb-2 text-xs font-bold text-cyan-400">
+                      Voting Contract
+                    </div>
+                    <div className="text-cyan-400 text-lg mb-2">↓</div>
+                    <div className="text-cyan-400 text-xs mb-2 font-bold">Inter-Contract Call</div>
+                    <div className="text-cyan-400 text-lg mb-2">↓</div>
+                    <div className="bg-yellow-500/20 border border-yellow-500 rounded p-2 text-xs font-bold text-yellow-400">
+                      Rewards Contract
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Transaction Log */}
-              <div className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-                <h3 className="text-lg font-bold text-white mb-4">📊 Contract Log</h3>
-                
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {interContractLogs.length === 0 ? (
-                    <p className="text-slate-400 text-sm text-center py-4">Cast a vote to see flow...</p>
+                {/* Transaction Log */}
+                <div className="space-y-2 max-h-80 overflow-y-auto">
+                  {interContractLog.length === 0 ? (
+                    <p className="text-slate-400 text-sm">Cast a vote to see contract flow...</p>
                   ) : (
-                    interContractLogs.map((log, idx) => (
-                      <div key={idx} className="bg-slate-700/50 p-2 rounded text-xs border-l-2 border-cyan-500">
-                        <div className="text-cyan-400 font-mono text-xs">{log.time}</div>
-                        <div className="text-slate-300 mt-1">{log.message}</div>
+                    interContractLog.map((log, idx) => (
+                      <div key={idx} className="bg-slate-700/50 p-2 rounded text-xs text-slate-300 border-l-2 border-cyan-500">
+                        <div className="text-cyan-400 font-mono">{log.timestamp}</div>
+                        <div className="mt-1">{log.message}</div>
                       </div>
                     ))
                   )}
                 </div>
-              </div>
 
-              {/* Vote Success */}
-              {voteSuccess && (
-                <div className="mt-6 bg-gradient-to-r from-green-500/20 to-yellow-500/20 border-2 border-green-500 rounded-lg p-4 animate-pulse">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle className="w-6 h-6 text-green-400" />
-                    <h4 className="text-green-400 font-bold">✅ Vote Success!</h4>
+                {/* Last Transaction */}
+                {lastTransaction && (
+                  <div className="mt-6 p-4 bg-green-500/10 border border-green-500 rounded">
+                    <h4 className="text-green-400 font-bold mb-2">✅ Last Transaction</h4>
+                    <div className="text-xs text-slate-300 space-y-1">
+                      <div>Vote: <span className="text-green-400 font-mono">{lastTransaction.votedFor}</span></div>
+                      <div>Earned: <span className="text-yellow-400 font-bold">+{lastTransaction.pointsEarned} Points</span></div>
+                      <div>Total: <span className="text-cyan-400 font-bold">{lastTransaction.totalPoints} Points</span></div>
+                      <div className="mt-2 pt-2 border-t border-green-500/30 text-green-400 text-xs">
+                        Chain: {lastTransaction.contractChain}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-slate-300 space-y-1">
-                    <p>Voted for: <span className="text-green-400 font-bold">{voteSuccess.option}</span></p>
-                    <p>Earned: <span className="text-yellow-400 font-bold">+{voteSuccess.points} Points</span></p>
-                    <p>Total: <span className="text-cyan-400 font-bold">{voteSuccess.total} Points</span></p>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      {/* Reward Popup */}
+      {/* Reward Notification */}
       <RewardsDisplay showReward={showReward} userRewards={userRewards} />
     </div>
   );
