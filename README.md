@@ -51,17 +51,15 @@ https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e
 
 ---
 
-# 📱 Screenshots
-
 ## Mobile Responsive View
 
-![Mobile View](images/mobile-view.png)
+![Mobile View](./images/mobile-view.png)
 
 ---
 
 ## CI/CD Pipeline
 
-![CI/CD Pipeline](images/cicd-pipeline.png)
+![CI/CD Pipeline](./images/cicd-pipeline.png)
 
 ---
 
