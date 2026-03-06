@@ -1,107 +1,169 @@
-# 🗳️ Stellar Live Poll
+# ⭐ Stellar Live Polls
 
-> Real-time on-chain voting DApp built on Stellar Soroban
-
----
-
-## 🌟 Overview
-
-**Stellar Live Poll** is a decentralized voting DApp built on the Stellar blockchain using Soroban smart contracts.
-Users connect their wallet and vote in a real-time poll.
-All votes are stored **on-chain** with live updates and transaction tracking.
+A decentralized **real-time polling application** built on the **Stellar blockchain using Soroban smart contracts**.
+This application allows users to create polls, vote securely, and view real-time voting results stored on the blockchain.
 
 ---
 
-## 🌐 Live Demo
+# 🚀 Live Demo
 
-👉 https://stellar-yellow-belt.vercel.app
-
-*(Frontend deployed on Vercel connected to Stellar Testnet contract)*
+https://stellar-yellow-belt-zyhz.vercel.app
 
 ---
 
-## 🖼️ Screenshots
+# 🎥 Demo Video
 
-### Wallet Connection
-
-![Wallet](wallet-connected.png)
-
-### Transaction Success
-
-![Transaction](transaction-success.png)
-
-### App UI (Voting)
-
-![App](app-ui.png)
+https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e
 
 ---
 
-## 🥋 Yellow Belt – Level 2 Requirements
+# ✨ Features
 
-| Requirement                          | Status |
-| ------------------------------------ | ------ |
-| Soroban contract deployed on testnet | ✅      |
-| Frontend calls contract              | ✅      |
-| Transaction status visible           | ✅      |
-| Wallet integration                   | ✅      |
-| Real-time voting UI                  | ✅      |
-| 2+ meaningful commits                | ✅      |
+* Create new polls
+* Vote on polls in real-time
+* View live voting results
+* Blockchain based transaction tracking
+* Wallet connection support
+* Smart contract integration
+* Reward display system
+* Transaction confirmation messages
+* Mobile responsive user interface
 
 ---
 
-## 📋 Contract Details
+# 🛠 Tech Stack
 
-### Contract Address
+### Frontend
+
+* React.js
+* Vite
+* Tailwind CSS
+
+### Blockchain
+
+* Stellar Soroban Smart Contracts
+* Rust
+
+### Deployment & DevOps
+
+* Vercel (Live Deployment)
+* GitHub Actions (CI/CD Pipeline)
+
+---
+
+# 📱 Screenshots
+
+## Mobile Responsive View
+
+![Mobile View](images/mobile-view.png)
+
+---
+
+## CI/CD Pipeline
+
+![CI/CD Pipeline](images/cicd-pipeline.png)
+
+---
+
+# 🔗 Smart Contract Details
+
+**Contract ID**
 
 CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC
 
-### Transaction Hash
+**Transaction Hash**
 
 7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
 
-### 🔗 View on Stellar Expert
+**Transaction Explorer**
 
 https://stellar.expert/explorer/testnet/tx/7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+# 📂 Project Structure
 
-### Prerequisites
+```
+stellar-live-poll
+│
+├── contracts
+│   ├── live-poll
+│   │   └── src
+│   │       └── lib.rs
+│   │
+│   ├── rewards
+│   └── voting
+│
+├── src
+│   ├── components
+│   │   ├── CreatePoll.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── PollCard.jsx
+│   │   ├── VotingInterface.jsx
+│   │   ├── RewardsDisplay.jsx
+│   │   └── TransactionStatus.jsx
+│   │
+│   ├── hooks
+│   ├── services
+│   ├── store
+│   ├── styles
+│   └── utils
+│
+├── public
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-* Node.js
-* Freighter Wallet
-* Testnet XLM (Friendbot)
+---
 
-### Installation
+# ⚙️ Run Locally
 
+Clone the repository
+
+```
 git clone https://github.com/harshaljagdale0222/stellar-yellow-belt.git
-cd stellar-yellow-belt
+```
+
+Go to project directory
+
+```
+cd stellar-live-poll
+```
+
+Install dependencies
+
+```
 npm install
+```
+
+Run the development server
+
+```
 npm run dev
-
-Open http://localhost:5173
-
----
-
-## ✨ Features
-
-* 🔐 Wallet connection (Freighter)
-* ⚡ Real-time voting updates
-* 📊 Transaction status tracking
-* 🌐 On-chain data storage
+```
 
 ---
 
-## 🛠️ Tech Stack
+# 🔄 CI/CD Pipeline
 
-* Vite + JavaScript
-* Stellar SDK
-* Freighter Wallet
-* Stellar Testnet
+This project uses **GitHub Actions** for Continuous Integration and **Vercel** for automatic deployment.
+
+Workflow:
+
+Code Push → GitHub Actions Tests → Vercel Deployment → Live Demo Update
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-Harshal Jagdale
+**Harshal Jagdale**
+
+GitHub
+https://github.com/harshaljagdale0222
+
+---
+
+# 📜 License
+
+This project was developed as part of the **Stellar Yellow Belt Program submission**.
