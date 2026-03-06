@@ -1,7 +1,7 @@
 # ⭐ Stellar Live Polls
 
 A decentralized **real-time polling application** built on the **Stellar blockchain using Soroban smart contracts**.
-This application allows users to create polls, vote securely, and view real-time voting results stored on the blockchain.
+Users can create polls, vote securely, and view live voting results stored on the blockchain.
 
 ---
 
@@ -20,46 +20,48 @@ https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e
 # ✨ Features
 
 * Create new polls
-* Vote on polls in real-time
-* View live voting results
-* Blockchain based transaction tracking
-* Wallet connection support
-* Smart contract integration
+* Vote in real-time
+* View live poll results
+* Blockchain transaction tracking
+* Wallet connection
+* Smart contract voting logic
 * Reward display system
 * Transaction confirmation messages
-* Mobile responsive user interface
+* Mobile responsive UI
 
 ---
 
 # 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 * React.js
 * Vite
 * Tailwind CSS
 
-### Blockchain
+## Blockchain
 
 * Stellar Soroban Smart Contracts
 * Rust
 
-### Deployment & DevOps
+## Deployment & DevOps
 
-* Vercel (Live Deployment)
-* GitHub Actions (CI/CD Pipeline)
-
----
-
-## Mobile Responsive View
-
-![Mobile View](./images/mobile-view.png)
+* Vercel (Deployment)
+* GitHub Actions (CI/CD)
 
 ---
 
-## CI/CD Pipeline
+# 📸 Screenshots
 
-![CI/CD Pipeline](./images/cicd-pipeline.png)
+## 📱 Mobile Responsive View
+
+![Mobile View](https://github.com/user-attachments/assets/e51c70c7-899e-4745-963f-0414c08d9f77)
+
+---
+
+## 🔄 CI/CD Pipeline
+
+![CI/CD Pipeline](https://github.com/user-attachments/assets/94af3c1e-1fae-4185-bc62-a073dcae2674)
 
 ---
 
@@ -135,7 +137,7 @@ Install dependencies
 npm install
 ```
 
-Run the development server
+Run development server
 
 ```
 npm run dev
