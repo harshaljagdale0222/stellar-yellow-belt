@@ -9,7 +9,7 @@
 
 ---
 
-## 🎬 Demo Video (Level 4)
+## 🎬 Demo Video (1 Min)
 👉 **[https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e](https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e)**
 
 ---
@@ -39,7 +39,7 @@
 
 **Network:** Stellar Testnet
 
-**Poll Contract Address:**
+**Contract Address:**
 ```
 CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC
 ```
@@ -52,11 +52,9 @@ https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4Y
 7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
 ```
 
-[View Transaction on Stellar Explorer](https://stellar.expert/explorer/testnet/tx/7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e)
-
 ## 🖼️ Screenshots - Level 2
 
-### 💳 Wallet Connected - Multi-Wallet Support
+### 💳 Wallet Connected
 ![Wallet Connected](./wallet-connected.png)
 
 ### ✅ Transaction Success
@@ -71,7 +69,7 @@ https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4Y
 - ✅ Lobstr
 - ✅ Albedo
 
-## 🛡️ Error Handling (5+ Types)
+## 🛡️ Error Handling
 - ✅ Wallet not connected
 - ✅ Transaction rejected by user
 - ✅ Insufficient XLM balance
@@ -82,7 +80,6 @@ https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4Y
 - ✅ Votes auto-refresh every 10 seconds
 - ✅ Live countdown timer
 - ✅ On-chain state via Soroban RPC
-- ✅ Real-time points counter
 
 ---
 
@@ -96,11 +93,11 @@ https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4Y
 | Minimum 3 tests passing | ✅ Done - 5 tests |
 | README complete | ✅ Done |
 | Demo video (1 minute) | ✅ Done |
-| Minimum 3+ meaningful commits | ✅ Done - 10+ commits |
+| Minimum 3+ meaningful commits | ✅ Done |
 | Public GitHub repository | ✅ Done |
 | Live demo link (Vercel) | ✅ Done |
 
-## 🧪 Smart Contract Tests - 5 Passing
+## 🧪 Smart Contract Tests - 5 Passing ✅
 
 ```
 running 5 tests
@@ -114,14 +111,6 @@ test tests::test_poll_results ... ok (224ms)
 test result: ok. 5 passed; 0 failed; 0 ignored
 ```
 
-## 🖼️ Screenshots - Level 3
-
-### 📊 App UI - Voting Interface
-![App UI](./app-ui.png)
-
-### ✅ Vote Success Modal
-![Transaction Success](./transaction-success.png)
-
 ## ✨ Level 3 Features
 
 - 🎨 Beautiful gradient UI with animations
@@ -130,11 +119,10 @@ test result: ok. 5 passed; 0 failed; 0 ignored
 - 💫 Smooth transitions and hover effects
 - ⏱️ Real-time vote updates
 - 📋 Transaction hash display
-- 🔗 Stellar Explorer links
 - 🏆 Points earned notification
 - ✅ Your Vote badge highlight
 - ⏳ Loading spinner on vote button
-- 📜 Transaction history with timestamps
+- 📜 Transaction history
 - 📱 Mobile-first responsive design
 
 ---
@@ -145,10 +133,10 @@ test result: ok. 5 passed; 0 failed; 0 ignored
 
 | Requirement | Status |
 |---|---|
-| Inter-contract call working | ✅ Done - Vote → Reward |
-| CI/CD running | ✅ Done - GitHub Actions |
-| Mobile responsive | ✅ Done - Fully responsive |
-| Minimum 8+ meaningful commits | ✅ Done - 15+ commits |
+| Inter-contract call working | ✅ Done |
+| CI/CD running | ✅ Done |
+| Mobile responsive | ✅ Done |
+| 8+ meaningful commits | ✅ Done |
 | Public GitHub repository | ✅ Done |
 | Live demo link | ✅ Done |
 
@@ -160,38 +148,24 @@ test result: ok. 5 passed; 0 failed; 0 ignored
 ### 🔄 CI/CD Pipeline Running
 ![CI/CD Pipeline](./cicd-pipeline.png)
 
-## 🔄 Inter-contract Call - PollReward Contract
+## 🔄 Inter-contract Call
 
-**How it works:**
-```
-User votes on Poll Contract
-        ↓
-Vote confirmed on Stellar
-        ↓
-PollReward Contract called automatically
-        ↓
-User receives reward! 🏆
-```
-
-**Poll Contract Address:**
+**Poll Contract:**
 ```
 CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC
 ```
 
-**Reward Contract Address:**
+**Reward Contract:**
 ```
 CDO6NXBA2BLY46GRXYZE7RTQJ2Q4HNUJLPJHJWVWLY6GLZ7UZNCTTJDS
 ```
 
-[View Reward Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CDO6NXBA2BLY46GRXYZE7RTQJ2Q4HNUJLPJHJWVWLY6GLZ7UZNCTTJDS)
-
 ## ✨ Level 4 Features
 
-- 🔄 CI/CD GitHub Actions pipeline
+- 🔄 Inter-contract call (Vote → Reward)
 - 📱 Mobile responsive design
-- 🤝 Inter-contract call (PollReward)
-- 🏆 Reward earned badge after voting
-- 📜 Both contract addresses in app
+- 🏆 Reward badge after voting
+- 🔄 CI/CD GitHub Actions pipeline
 
 ---
 
@@ -203,7 +177,6 @@ CDO6NXBA2BLY46GRXYZE7RTQJ2Q4HNUJLPJHJWVWLY6GLZ7UZNCTTJDS
 | Frontend | React + Vite |
 | Wallets | Freighter, xBull, Lobstr, Albedo |
 | Network | Stellar Testnet |
-| RPC | soroban-testnet.stellar.org |
 | Deployment | Vercel |
 | CI/CD | GitHub Actions |
 
@@ -217,43 +190,6 @@ cd stellar-live-polls
 npm install
 npm run dev
 ```
-
-Open http://localhost:5173
-
-**Requirements:**
-- Node.js 18+
-- Stellar wallet (Freighter, xBull, Lobstr, or Albedo)
-- Wallet set to Stellar Testnet
-- Free test XLM from https://friendbot.stellar.org
-
----
-
-## 📁 Project Structure
-
-```
-stellar-live-polls/
-├── .github/workflows/ci.yml
-├── contracts/poll/src/lib.rs
-├── contracts/reward/src/lib.rs
-├── src/components/
-├── src/styles/
-├── app-ui.png
-├── wallet-connected.png
-├── transaction-success.png
-├── mobile-view.png
-├── cicd-pipeline.png
-├── package.json
-└── README.md
-```
-
----
-
-## 📞 Links
-
-- **Live Demo:** https://stellar-yellow-belt-exhq.vercelapp/
-- **Demo Video:** https://www.loom.com/share/405dd9f6bdae4a7b8362e36ccbb5a46e
-- **Poll Contract:** https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4YUL6PR6GB7LQZEWCR6TC
-- **Deploy TX:** https://stellar.expert/explorer/testnet/tx/7ff7b88db5be060fc826d34870dfe55d81ba30931c57dc582f548603501ff10e
 
 ---
 
