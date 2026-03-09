@@ -5,7 +5,8 @@
 ---
 
 ## 🌐 Live Demo
-👉 **[https://stellar-yellow-belt-6dr7-qeozr088g-harshaljagdale0222s-projects.vercel.app/](https://stellar-yellow-belt-6dr7-qeozr088g-harshaljagdale0222s-projects.vercel.app/)**
+👉 https://stellar-yellow-belt-6dr7.vercel.app/
+
 ---
 
 ## 🎬 Demo Video (1 Min)
