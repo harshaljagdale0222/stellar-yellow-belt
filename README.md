@@ -97,6 +97,11 @@ https://lab.stellar.org/r/testnet/contract/CA4QCBLGGFS55SYUMJTTQ7JGPX4TZIWP4SJ4Y
 | Public GitHub repository | ✅ Done |
 | Live demo link (Vercel) | ✅ Done |
 
+## 🖼️ Screenshots - Level 3
+
+### 💳 Test Passing
+![Test Passed](./test-results.png)
+
 ## 🧪 Smart Contract Tests - 5 Passing ✅
 
 ```
