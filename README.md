@@ -5,7 +5,7 @@
 ---
 
 ## 🌐 Live Demo
-👉 **[https://stellar-yellow-belt-exhq.vercelapp/](https://stellar-yellow-belt-exhq.vercelapp/)**
+👉 **[https://stellar-yellow-belt-exhq.vercelapp/](stellar-yellow-belt-6dr7.vercel.app)**
 
 ---
 
